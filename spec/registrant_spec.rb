@@ -24,6 +24,16 @@ RSpec.describe Registrant do
       expect(@registrant_1.name).to eq('Bruce')
     end
   end
+
+  describe 'permit?' do 
+    it 'shows true if registrant has a permit' do  
+      expect(@registrant_1.permit?).to eq(true)
+    end
+
+    it 'shows if registrant doesnot have a permit' do 
+      expect(@registrant_2.permit?).to eq(false)
+    end
+  end
 end
 
   
