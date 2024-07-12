@@ -32,4 +32,10 @@ RSpec.describe Facility do
     end
   end
 
+  describe 'colllected fees' do 
+    it 'collects fees' do 
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
 end
