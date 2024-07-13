@@ -94,14 +94,12 @@ RSpec.describe Facility do
     end
 
     describe 'road test' do 
-      before(:each) do
+      it 'takes road test for qualified registrant' do
         @registrant_1 = Registrant.new('Bruce', 18, true)
         facility_1.add_service('Written Test')
         facility_1.add_service('Road Test')
         facility_1.administer_written_test(@registrant_1)
         facility_1.administer_road_test(@registrant_1)
-      end
-      it 'takes road test for qualified registrant' do
         expect(@registrant_1.license_data[:license]).to be true
      end
     end
