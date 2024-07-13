@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 require 'date'
 
 RSpec.describe Facility do
@@ -10,6 +11,7 @@ RSpec.describe Facility do
       address: '2855 Tremont Place Suite 118 Denver CO 80205',
       phone: '(720) 865-4600'
     })
+    
   end
 
   let(:facility_2) do
@@ -49,6 +51,7 @@ RSpec.describe Facility do
       model: 'Camaro',
       engine: :ice
     })
+    
   end
 
   describe '#initialize' do
@@ -69,10 +72,6 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-      
-      
-     
-
       it 'registers a vehicle with plate_type :regular' do 
         facility_1.add_service('Vehicle Registration')
         facility_1.register_vehicle(cruz)
@@ -105,5 +104,19 @@ RSpec.describe Facility do
         expect(facility_2.collected_fees).to eq(0)
       end
 
+      describe 'administer_written_test' do
+      it 'allows eligible registrants to take the written test' do
+        @registrant_1 = Registrant.new('Bruce', 18, true)
+        facility_1.add_service('Written Test')
+        expect(facility_1.administer_written_test(@registrant_1)).to be true
+        expect(@registrant_1.license_data[:written]).to be true
+      end
+  
+      it 'does not allow ineligible registrants to take the written test' do
+        @registrant_3 = Registrant.new('Tucker',15)
+        expect(facility_1.administer_written_test(@registrant_3)).to be false
+        expect(@registrant_3.license_data[:written]).to be false
+      end
+    end
     end
 end
