@@ -60,6 +60,8 @@ class Facility
     if @services.include?('Renew License') && registrant.license_data[:license]
       registrant.license_data[:renewed] = true
       true
+    else
+      false
     end
   end
 end
