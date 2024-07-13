@@ -124,8 +124,16 @@ RSpec.describe Facility do
       it 'renews license dor qualified registrants' do 
         @registrant_1 = Registrant.new('Bruce', 18, true)
         @registrant_2 = Registrant.new('Penny', 16)
-        facility_1.add_service('Renew License')
-
+        @registrant_2.earn_permit
+        facility_1.add_service('Written test')
+        facility_1.add_service('Road Test')
+        facility_1.add_service('Renew license')
+        facility_1.administer_written_test(@registrant_1)
+        facility_1.administer_written_test(@registrant_2)
+        facility_1.administer_road_test(@registrant_1)
+        facility_1.administer_road_test(@registrant_2)
+        expect(facility_1.renew_drivers_license(@registrant_1)).to be true
+        expect(facility_1.renew_drivers_license(@registrant_2)).to be true
       end
     end
     
