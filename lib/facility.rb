@@ -51,6 +51,8 @@ class Facility
     if @services.include?('Road Test') && registrant.permit? && registrant.age >= 16
       registrant.license_data[:license] = true
       true
+    else 
+      false
     end
   end
 end
