@@ -81,35 +81,52 @@ RSpec.describe Facility do
     describe 'administer_written_test' do
       it 'allows eligible registrants to take the written test' do
         @registrant_1 = Registrant.new('Bruce', 18, true)
+        @registrant_2 = Registrant.new('Penny', 16)
         facility_1.add_service('Written Test')
         expect(facility_1.administer_written_test(@registrant_1)).to be true
+        expect(facility_1.administer_written_test(@registrant_1)).to be true
+        expect(@registrant_1.license_data[:written]).to be true
         expect(@registrant_1.license_data[:written]).to be true
       end
   
       it 'does not allow ineligible registrants to take the written test' do
-        @registrant_2 = Registrant.new('Tucker',15)
+        @registrant_3 = Registrant.new('Tucker',15)
         expect(facility_1.administer_written_test(@registrant_2)).to be false
-        expect(@registrant_2.license_data[:written]).to be false
+        expect(@registrant_3.license_data[:written]).to be false
       end
     end
 
     describe 'road test' do 
-      it 'takes road test for qualified registrant' do
+      it 'takes road test for qualified registrants' do
         @registrant_1 = Registrant.new('Bruce', 18, true)
+        @registrant_2 = Registrant.new('Penny', 16)
+        @registrant_2.earn_permit
         facility_1.add_service('Written Test')
         facility_1.add_service('Road Test')
         facility_1.administer_written_test(@registrant_1)
+        facility_1.administer_written_test(@registrant_2)
         facility_1.administer_road_test(@registrant_1)
+        facility_1.administer_road_test(@registrant_2)
         expect(@registrant_1.license_data[:license]).to be true
-     end
+        expect(@registrant_2.license_data[:license]).to be true
+     
+      end
 
      it 'does not take road test for unqualified registrant' do 
-      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
       facility_1.administer_written_test(@registrant_2)
       expect(facility_1.administer_road_test(@registrant_2)).to be false
-      expect(@registrant_2.license_data[:license]).to be false
+      expect(@registrant_3.license_data[:license]).to be false
      end
     end
+    
+    describe 'Renew license' do 
+      it 'renews license dor qualified registrants' do 
+        @registrant_1 = Registrant.new('Bruce', 18, true)
+        @registrant_2 = Registrant.new('Penny', 16)
+        facility_1.add_service('Renew License')
 
+      end
+    end
     
 end
