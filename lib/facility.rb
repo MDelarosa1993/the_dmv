@@ -46,4 +46,11 @@ class Facility
       false
     end
   end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.permit? && registrant.age >= 16
+      registrant.license_data[:license] = true
+      true
+    end
+  end
 end
