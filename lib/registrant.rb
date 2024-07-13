@@ -19,4 +19,11 @@ class Registrant
   def earn_permit
     @permit = true
   end
+  
+  def administer_written_test(registrant)
+  return false unless @services.include?('Written Test')
+  registrant.license_data[:written] = true
+end
+
+
 end
