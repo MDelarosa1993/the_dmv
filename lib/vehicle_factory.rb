@@ -13,4 +13,4 @@ class VehicleFactory
     end
     vehicles
   end
-end
+  end
