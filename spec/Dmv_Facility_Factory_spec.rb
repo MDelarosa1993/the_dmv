@@ -8,7 +8,7 @@ RSpec.describe DmvFacilityFactory do
      @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
      @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
      @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    end
+    end 
     describe 'creates facilities ' do 
       it 'creates Colorado objects' do 
         facilities = DmvFacilityFactory.new.colorado_facilities(@co_dmv_office_locations)
