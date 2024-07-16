@@ -17,7 +17,6 @@ class DmvFacilityFactory
       name = new_york_facility[:office_name]
       address = "#{new_york_facility[:street_address_line_1]}, #{new_york_facility[:city]}, #{new_york_facility[:state]}, #{new_york_facility[:zip_code]}"
       phone = new_york_facility[:public_phone_number]
-      new_york_facility[:public_phone_number]
       Facility.new({name: name, address: address, phone: phone})  
     end
     facilities

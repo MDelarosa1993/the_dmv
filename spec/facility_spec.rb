@@ -54,7 +54,6 @@ end
         expect(@facility_1.collected_fees).to eq(25)
       end
   
-
       it 'registers a third vehicle with plate_type :ev' do
         @facility_1.add_service('Vehicle Registration')
         @facility_1.register_vehicle(@bolt)
